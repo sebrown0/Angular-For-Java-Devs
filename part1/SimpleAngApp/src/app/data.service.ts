@@ -7,6 +7,7 @@ import { Book } from 'src/model/book';
 export class DataService {
   books:Array<Book> = new Array<Book>();
   bookAddedEvent = new EventEmitter<Book>();
+  bookRemovedEvent = new EventEmitter<Book>();
 
   constructor() {
     const book1 = new Book();
@@ -29,8 +30,23 @@ export class DataService {
   }
 
   addBook(book:Book){
-    this.books.push(book);
-    this.bookAddedEvent.emit(book);
+    if(book.author === 'Bob'){
+      this.bookAddedEvent.error('Books by Bob not allowed');
+    }else{
+      this.books.push(book);
+      this.bookAddedEvent.emit(book);
+    }
+  }
+
+  removeLastBook(){
+    let numBooks = this.books.length-1;
+    if(numBooks >= 0){
+      const book = this.books.pop();
+      this.bookRemovedEvent.emit(book);
+    }else{
+      this.bookRemovedEvent.error('No more books to delete!')
+    }
+
   }
 
 }

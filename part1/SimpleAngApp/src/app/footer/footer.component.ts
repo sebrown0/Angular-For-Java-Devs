@@ -22,5 +22,11 @@ export class FooterComponent implements OnInit {
     book.author = 'Steve';
     this.dataService.addBook(book);
   }
+  addBookByBob(){
+    const book = new Book();
+    book.title = 'Book By Bob';
+    book.author = 'Bob';
+    this.dataService.addBook(book);
+  }
 
 }
