@@ -1,10 +1,19 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Book } from 'src/model/book';
 
+export interface DataServiceInterface {
+  books:Array<Book>;
+  bookAddedEvent:EventEmitter<Book>;
+  bookRemovedEvent:EventEmitter<Book>;
+
+  addBook(book:Book):void;
+  removeLastBook():void;
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class DataService implements DataServiceInterface {
   books:Array<Book> = new Array<Book>();
   bookAddedEvent = new EventEmitter<Book>();
   bookRemovedEvent = new EventEmitter<Book>();
@@ -46,7 +55,6 @@ export class DataService {
     }else{
       this.bookRemovedEvent.error('No more books to delete!')
     }
-
   }
 
 }

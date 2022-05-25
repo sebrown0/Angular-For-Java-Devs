@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Book } from 'src/model/book';
-import { DataService } from '../data.service';
+import { DataService, DataServiceInterface } from '../data.service';
 
 @Component({
   selector: 'app-page1',
@@ -14,7 +14,7 @@ export class Page1Component implements OnInit, OnDestroy {
   subscription!:Subscription;
   subscription2!:Subscription;
 
-  constructor(public dataService:DataService) { }
+  constructor(public dataService:DataServiceInterface) { }
 
   ngOnInit(): void {
     this.books = this.dataService.books;
